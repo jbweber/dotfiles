@@ -20,8 +20,8 @@ set t_Co=256
 color fu
 autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 autocmd BufRead,BufNewFile *.py highlight BadWhitespace ctermbg=red guibg=red
-autocmd BufRead,BufNewFile *.py match BadWhitespcace /^\t\+/
-autocmd BufRead,BufNewFile *.py match BadWhitespcace /^\s\+%/
+autocmd BufRead,BufNewFile *.py match BadWhitespace /^\t\+/
+autocmd BufRead,BufNewFile *.py match BadWhitespace /^\s\+%/
 autocmd BufRead,BufNewFile *.wsgi set filetype=python
 autocmd BufRead,BufNewFile *.sh,*.wsdl,*.xsd,*.xml,*.yml,*.yaml set tabstop=2
 autocmd BufRead,BufNewFile *.sh,*.wsdl,*.xsd,*.xml,*.yml,*.yaml set shiftwidth=2

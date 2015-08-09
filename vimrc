@@ -5,6 +5,8 @@ syntax on
 set t_Co=256
 set background=dark
 
+colorscheme Sunburst
+
 set nocompatible
 set nohlsearch
 set ai

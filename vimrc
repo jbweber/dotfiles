@@ -24,3 +24,5 @@ set smartindent
 set expandtab
 
 filetype plugin indent on
+
+map <F2> :NERDTreeToggle<CR>

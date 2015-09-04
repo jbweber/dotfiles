@@ -22,3 +22,6 @@
 [submodule "vim/bundle/vim-nerdtree"]
 	path = vim/bundle/vim-nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vim/bundle/vim-python-mode"]
+	path = vim/bundle/vim-python-mode
+	url = https://github.com/klen/python-mode

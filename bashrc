@@ -63,5 +63,5 @@ PS2="-->"
 export PS1 PS2o
 [[ -n $INTERACTIVE && -n $LOGIN ]] && {
     export LS_COLORS=$(echo $LS_COLORS | sed "s/di=\(..\);../di=\1;94/")
-    eval `~/.dotfiles/keychain --eval --agents ssh id_rsa wobble_id_rsa`
+    eval $(~/.dotfiles/keychain --eval --agents ssh id_rsa)
 }

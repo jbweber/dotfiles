@@ -25,3 +25,6 @@
 [submodule "vim/bundle/vim-python-mode"]
 	path = vim/bundle/vim-python-mode
 	url = https://github.com/klen/python-mode
+[submodule "vim/bundle/vim-go"]
+	path = vim/bundle/vim-go
+	url = https://github.com/fatih/vim-go

@@ -65,5 +65,9 @@ PS2="-->"
 export PS1 PS2o
 [[ -n $INTERACTIVE && -n $LOGIN ]] && {
     export LS_COLORS=$(echo $LS_COLORS | sed "s/di=\(..\);../di=\1;94/")
-    eval $(~/.dotfiles/keychain --eval --agents ssh id_rsa)
+    eval $(~/.dotfiles/keychain/keychain.sh --eval --agents ssh id_rsa)
 }
+
+if [[ -d ~/.bin ]]; then
+    export PATH=~/.bin:$PATH
+fi

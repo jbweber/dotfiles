@@ -1,3 +1,5 @@
+#!/bin/bash
+
 mkdir ~/.dotfiles_backup
 mv ~/.bash_profile ~/.bashrc ~/.gitconfig ~/.tmux.conf ~/.vim ~/.vimrc ~/.dotfiles_backup
 ln -sf ~/.dotfiles/bash_profile ~/.bash_profile

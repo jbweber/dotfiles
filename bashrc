@@ -42,7 +42,7 @@ dircolors="$(type -P gdircolors dircolors | head -1)"
 [[ -n $dircolors ]] && {
     COLORS=/etc/DIR_COLORS
     test -e "/etc/DIR_COLORS.$TERM" && COLORS="/etc/DIR_COLORS.$TERM"
-    test -e "~/.dircolors" && COLORS="~/.dircolors"
+    test -e "$HOME/.dircolors" && COLORS="$HOME/.dircolors"
     test ! -e "$COLORS" && COLORS=
     eval `$dircolors --sh $COLORS`
 }
@@ -60,14 +60,18 @@ WHITE="\[\033[0;37m\]"
 NONE="\[\033[0m\]"
 
 PS1="${WHITE}[\${?}]${YELLOW}\u${WHITE}@${RED}\h${WHITE}:\w\n\$ ${NONE}"
-PS2="-->"
+PS2="--> "
 
-export PS1 PS2o
-[[ -n $INTERACTIVE && -n $LOGIN ]] && {
-    export LS_COLORS=$(echo $LS_COLORS | sed "s/di=\(..\);../di=\1;94/")
-    eval $(~/.dotfiles/keychain/keychain.sh --eval --agents ssh id_rsa)
-}
+export PS1 PS2
 
-if [[ -d ~/.bin ]]; then
-    export PATH=~/.bin:$PATH
+# set the directory color to a better blue
+export LS_COLORS=$(echo $LS_COLORS | sed "s/di=\(..\);../di=\1;94/")
+
+# load keychain into scope
+if [[ -x $HOME/.dotfiles/keychain/keychain ]]; then
+    eval $($HOME/.dotfiles/keychain/keychain --eval --agents ssh id_rsa)
+fi
+
+if [[ -d $HOME/.bin ]]; then
+    export PATH=$HOME/.bin:$PATH
 fi

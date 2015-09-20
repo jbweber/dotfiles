@@ -54,12 +54,12 @@ BBLUE="\[\033[1;34m\]"
 CYAN="\[\033[0;36m\]"
 GREEN="\[\033[0;32m\]"
 PURPLE="\[\033[0;35m\]"
+PURPLE_BOLD="\[\033[1;35m\]"
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
 WHITE="\[\033[0;37m\]"
 NONE="\[\033[0m\]"
-
-PS1="${WHITE}[\${?}]${YELLOW}\u${WHITE}@${RED}\h${WHITE}:\w\n\$ ${NONE}"
+PS1="\n${WHITE}[\${?}] ${PURPLE_BOLD}\u${WHITE}@${PURPLE_BOLD}\h${WHITE}:${CYAN}\w\n${WHITE}\$ ${NONE}"
 PS2="--> "
 
 export PS1 PS2

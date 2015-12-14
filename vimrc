@@ -27,6 +27,8 @@ filetype plugin indent on
 
 map <F2> :NERDTreeToggle<CR>
 
+au FileType make set listchars=tab:\¦\ ,trail:-,extends:>,precedes:<,nbsp:+
+
 " vim-go
 au FileType go set listchars=tab:\¦\ ,trail:-,extends:>,precedes:<,nbsp:+
 au FileType go nmap <leader>r <Plug>(go-run)

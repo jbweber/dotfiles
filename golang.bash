@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source functions.bash
+source $HOME/.dotfiles/functions.bash
 
 export GOROOT=$HOME/go
 path_append $GOROOT/bin

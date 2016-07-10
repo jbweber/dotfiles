@@ -2,15 +2,22 @@
 
 source $HOME/.dotfiles/functions.bash
 
-export GOROOT=$HOME/go
-path_append $GOROOT/bin
+#
+GOLANG_VERSION=1.6.2
+GOLANG_DOWNLOAD_URL=https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz
+
+GOLANG_BASE=${HOME}/go
+export GOROOT=${GOLANG_BASE}/go${GOLANG_VERSION}
+export GOPATH=${GOLANG_BASE}/gopath
 
 [[ ! -d $GOROOT ]] && {
     gotmp=$(mktemp -d)
     pushd $gotmp
-        curl -O -L -J https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz
-        gzip -cd go1.6.linux-amd64.tar.gz | tar xf -
-        mv ./go $HOME
+        curl -O -L -J $GOLANG_DOWNLOAD_URL
+        gzip -cd go${GOLANG_VERSION}.linux-amd64.tar.gz | tar xf -
+
+        mkdir -p $GOLANG_BASE
+        mv ./go ${GOLANG_BASE}/go${GOLANG_VERSION}
     popd
 
     [[ -d $gotmp ]] && {
@@ -18,11 +25,9 @@ path_append $GOROOT/bin
     }
 }
 
-BASE_GOPATH=$HOME/gopath
-
-[[ ! -d $BASE_GOPATH ]] && {
-    [[ -z $GOPATH ]] && {
-        export GOPATH=$BASE_GOPATH
-        mkdir -p $GOPATH
-    }
+[[ ! -d $GOPATH/bin ]] && {
+    mkdir -p $GOPATH/bin
 }
+
+path_prepend $GOROOT/bin
+path_prepend $GOPATH/bin

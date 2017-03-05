@@ -10,12 +10,15 @@ esac
 
 [[ -r /etc/bashrc && -f /etc/bashrc ]] && source /etc/bashrc
 
+umask 022
+
+source $HOME/.dotfiles/functions.sh
+source $HOME/.dotfiles/vars_global.sh
+
 [[ -e "/usr/share/terminfo/x/xterm-256color" ]] &&
     TERM=xterm-256color ||
     TERM=xterm-color
 export TERM
-
-umask 022
 
 # VAR=${OTHER:-default] var = other or default if not set
 # VAR=${OTHER:=default] var = other or default if not set, also set other
@@ -47,7 +50,10 @@ dircolors="$(type -P gdircolors dircolors | head -1)"
 }
 unset dircolors
 
-#
+# set the directory color to a better blue
+export LS_COLORS=$(echo $LS_COLORS | sed "s/di=\(..\);../di=\1;94/")
+
+# prompt
 BLUE="\[\033[0;34m\]"
 BBLUE="\[\033[1;34m\]"
 CYAN="\[\033[0;36m\]"
@@ -59,19 +65,17 @@ WHITE="\[\033[0;37m\]"
 NONE="\[\033[0m\]"
 PS1="\n${WHITE}[\${?}]${YELLOW}\u${WHITE}@${RED}\h${WHITE}:\w\n\$ ${NONE}"
 PS2="--> "
-
 export PS1 PS2
-
-# set the directory color to a better blue
-export LS_COLORS=$(echo $LS_COLORS | sed "s/di=\(..\);../di=\1;94/")
 
 # load keychain into scope
 if [[ -x $HOME/.dotfiles/keychain/keychain ]]; then
-    eval $($HOME/.dotfiles/keychain/keychain --eval --agents ssh id_rsa)
+    path_prepend $HOME/.dotfiles/keychain
+    source $HOME/.dotfiles/keychain.sh
 fi
 
+# load local stuff
 if [[ -d $HOME/.bin ]]; then
-    export PATH=$HOME/.bin:$PATH
+    path_prepend $HOME/.bin
 fi
 
-source $HOME/.dotfiles/golang.bash
+source $HOME/.dotfiles/golang.sh

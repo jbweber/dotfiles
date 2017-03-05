@@ -1,9 +1,5 @@
 #!/bin/bash
 
-source $HOME/.dotfiles/functions.bash
-
-#
-GOLANG_VERSION=1.7.4
 GOLANG_DOWNLOAD_URL=https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz
 
 GOLANG_BASE=${HOME}/go
@@ -24,10 +20,3 @@ export GOPATH=${GOLANG_BASE}/gopath
         rm -rf $gotmp
     }
 }
-
-[[ ! -d $GOPATH/bin ]] && {
-    mkdir -p $GOPATH/bin
-}
-
-path_prepend $GOROOT/bin
-path_prepend $GOPATH/bin

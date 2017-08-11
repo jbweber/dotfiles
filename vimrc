@@ -4,8 +4,7 @@ syntax on
 
 set t_Co=256
 set background=dark
-
-colorscheme Sunburst
+colorscheme fu
 
 set nocompatible
 set nohlsearch
@@ -23,14 +22,13 @@ set autoindent
 set smartindent
 set expandtab
 
+set autowrite
+
 filetype plugin indent on
 
-map <F2> :NERDTreeToggle<CR>
-
-au FileType make set listchars=tab:\¦\ ,trail:-,extends:>,precedes:<,nbsp:+
-
 " vim-go
-au FileType go set listchars=tab:\¦\ ,trail:-,extends:>,precedes:<,nbsp:+
+au FileType go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+au FileType go setlocal listchars+=tab:\ \ ,
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
@@ -44,6 +42,8 @@ au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>e <Plug>(go-rename)
 
+" python-mode
 let g:pymode_rope = 0
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_autoimport = 0

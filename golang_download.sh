@@ -1,10 +1,10 @@
 #!/bin/bash
 
+source $HOME/.dotfiles/golang.sh
+
 GOLANG_DOWNLOAD_URL=https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz
 
 GOLANG_BASE=${HOME}/go
-export GOROOT=${GOLANG_BASE}/go${GOLANG_VERSION}
-export GOPATH=${GOLANG_BASE}/gopath
 
 [[ ! -d $GOROOT ]] && {
     gotmp=$(mktemp -d)

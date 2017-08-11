@@ -13,7 +13,6 @@ esac
 umask 022
 
 source $HOME/.dotfiles/functions.sh
-source $HOME/.dotfiles/vars_global.sh
 
 [[ -e "/usr/share/terminfo/x/xterm-256color" ]] &&
     TERM=xterm-256color ||
@@ -75,7 +74,7 @@ fi
 
 # load local stuff
 if [[ -d $HOME/.bin ]]; then
-    path_prepend $HOME/.bin
+    path_prepend $HOME/.dotfiles/bin
 fi
 
 source $HOME/.dotfiles/golang.sh

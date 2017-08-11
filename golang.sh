@@ -3,7 +3,7 @@
 source $HOME/.dotfiles/functions.sh
 
 # Go variables
-GOLANG_VERSION=1.7.5
+GOLANG_VERSION=1.8.3
 export GOLANG_VERSION
 
 GOLANG_BASE=${HOME}/go

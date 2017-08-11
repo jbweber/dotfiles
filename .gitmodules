@@ -19,6 +19,6 @@
 [submodule "vim/bundle/vim-better-whitespace"]
 	path = vim/bundle/vim-better-whitespace
 	url = https://github.com/ntpeters/vim-better-whitespace.git
-[submodule "vim/bundle/python-mode/python-mode"]
-	path = vim/bundle/python-mode/python-mode
+[submodule "vim/bundle/python-mode"]
+	path = vim/bundle/python-mode
 	url = https://github.com/python-mode/python-mode.git

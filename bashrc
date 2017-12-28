@@ -14,8 +14,8 @@ umask 022
 
 source $HOME/.dotfiles/functions.sh
 
-[[ -e "/usr/share/terminfo/x/xterm-256color" ]] &&
-    TERM=xterm-256color ||
+[[ -e "/usr/share/terminfo/s/screen-256color" ]] &&
+    TERM=screen-256color ||
     TERM=xterm-color
 export TERM
 

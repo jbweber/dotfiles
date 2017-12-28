@@ -71,4 +71,11 @@ if [[ -d $HOME/.bin ]]; then
     path_prepend $HOME/.dotfiles/bin
 fi
 
+# ssh agent
+SSH_AUTH_SOCK=/tmp/${USER}/ssh-agent.sock
+SSH_AUTH_SOCK_DIR=$(dirname ${SSH_AUTH_SOCK})
+[[ -d ${SSH_AUTH_SOCK_DIR} ]] || mkdir -m0700 ${SSH_AUTH_SOCK_DIR}
+[[ -S ${SSH_AUTH_SOCK} ]] || eval $(ssh-agent -a "${SSH_AUTH_SOCK}" -t 8h)
+export SSH_AUTH_SOCK
+
 source $HOME/.dotfiles/golang.sh

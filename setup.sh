@@ -8,3 +8,9 @@ ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/vim ~/.vim
 ln -sf ~/.dotfiles/vimrc ~/.vimrc
+
+# nvim
+mkdir -p ~/.config
+
+ln -sf ~/.dotfiles/vim ~/.config/nvim
+ln -sf ~/.dotfiles/vimrc ~/.config/nvim/init.vim

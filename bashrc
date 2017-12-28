@@ -14,8 +14,8 @@ umask 022
 
 source $HOME/.dotfiles/functions.sh
 
-[[ -e "/usr/share/terminfo/x/xterm-256color" ]] &&
-    TERM=xterm-256color ||
+[[ -e "/usr/share/terminfo/s/screen-256color" ]] &&
+    TERM=screen-256color ||
     TERM=xterm-color
 export TERM
 
@@ -65,12 +65,6 @@ NONE="\[\033[0m\]"
 PS1="\n${WHITE}[\${?}]${YELLOW}\u${WHITE}@${RED}\h${WHITE}:\w\n\$ ${NONE}"
 PS2="--> "
 export PS1 PS2
-
-# load keychain into scope
-if [[ -x $HOME/.dotfiles/keychain/keychain ]]; then
-    path_prepend $HOME/.dotfiles/keychain
-    source $HOME/.dotfiles/keychain.sh
-fi
 
 # load local stuff
 if [[ -d $HOME/.bin ]]; then

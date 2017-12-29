@@ -12,9 +12,12 @@ This repository contains my dotfiles. To use them clone the repository to
 
 ## Vim
 
-* [vim-sensible - 49ee364](https://github.com/tpope/vim-sensible.git)
+* [python-mode - 2ae7a23](https://github.com/python-mode/python-mode.git)
 * [vim-airline - c386332](https://github.com/vim-airline/vim-airline.git)
 * [vim-airline-themes - a7fcf53](https://github.com/vim-airline/vim-airline-themes.git)
+* [vim-commentary - 89f43af](https://github.com/tpope/vim-commentary.git)
 * [vim-better-whitespace - 688837f](https://github.com/ntpeters/vim-better-whitespace.git)
-* [vim-yaml - 9596b63](https://github.com/stephpy/vim-yaml.git)
+* [vim-json - a05984f](https://github.com/elzr/vim-json)
 * [vim-go - 1.15](https://github.com/fatih/vim-go.git)
+* [vim-sensible - 49ee364](https://github.com/tpope/vim-sensible.git)
+* [vim-yaml - 9596b63](https://github.com/stephpy/vim-yaml.git)

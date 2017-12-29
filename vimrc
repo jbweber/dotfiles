@@ -45,6 +45,9 @@ au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>e <Plug>(go-rename)
 
+let g:go_fmt_command = "goimports"
+let g:go_version_warning = 0
+
 " python-mode
 let g:pymode_rope = 0
 let g:pymode_rope_lookup_project = 0

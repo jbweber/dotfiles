@@ -22,7 +22,10 @@ set expandtab       " tabs are spaces
 set autowrite       " automatically save before :next etc.
 set autoread        " automatically reread changed files
 
-" airline
+set completeopt+=menuone
+set completeopt-=preview
+
+" vim-airline
 let g:airline_theme='wombat'
 
 " vim-go

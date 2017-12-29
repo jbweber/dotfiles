@@ -12,6 +12,7 @@ This repository contains my dotfiles. To use them clone the repository to
 
 ## Vim
 
+* [python-mode - 2ae7a23](https://github.com/python-mode/python-mode.git)
 * [vim-airline - c386332](https://github.com/vim-airline/vim-airline.git)
 * [vim-airline-themes - a7fcf53](https://github.com/vim-airline/vim-airline-themes.git)
 * [vim-commentary - 89f43af](https://github.com/tpope/vim-commentary.git)

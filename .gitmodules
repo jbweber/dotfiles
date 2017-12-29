@@ -22,3 +22,6 @@
 [submodule "vim/pack/dotfiles/start/vim-json"]
 	path = vim/pack/dotfiles/start/vim-json
 	url = https://github.com/elzr/vim-json
+[submodule "vim/pack/dotfiles/start/python-mode"]
+	path = vim/pack/dotfiles/start/python-mode
+	url = https://github.com/python-mode/python-mode.git

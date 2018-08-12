@@ -78,4 +78,7 @@ SSH_AUTH_SOCK_DIR=$(dirname ${SSH_AUTH_SOCK})
 [[ -S ${SSH_AUTH_SOCK} ]] || eval $(ssh-agent -a "${SSH_AUTH_SOCK}" -t 8h)
 export SSH_AUTH_SOCK
 
-source $HOME/.dotfiles/golang.sh
+[[ -d ${HOME}/.go/bin ]] && {
+    export GOROOT=${HOME}/.go
+    path_prepend ${GOROOT}/bin
+}

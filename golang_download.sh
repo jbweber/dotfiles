@@ -1,22 +1,18 @@
 #!/bin/bash
 
-source $HOME/.dotfiles/golang.sh
+set -x
 
+GOLANG_VERSION=1.10.3
 GOLANG_DOWNLOAD_URL=https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz
 
-GOLANG_BASE=${HOME}/go
-
-[[ ! -d $GOROOT ]] && {
+[[ ! -d ${HOME}/.go${GOLANG_VERSION} ]] && {
     gotmp=$(mktemp -d)
-    pushd $gotmp
-        curl -O -L -J $GOLANG_DOWNLOAD_URL
-        gzip -cd go${GOLANG_VERSION}.linux-amd64.tar.gz | tar xf -
+    trap "rm -rf ${gotmp}" EXIT
 
-        mkdir -p $GOLANG_BASE
-        mv ./go ${GOLANG_BASE}/go${GOLANG_VERSION}
+    pushd ${gotmp}
+        curl -O -L -J ${GOLANG_DOWNLOAD_URL}
+        tar -C ${HOME} --transform=s/^go/.go${GOLANG_VERSION}/g -zxf go${GOLANG_VERSION}.linux-amd64.tar.gz
+
+        ln -sf ${HOME}/.go${GOLANG_VERSION} ${HOME}/.go
     popd
-
-    [[ -d $gotmp ]] && {
-        rm -rf $gotmp
-    }
 }

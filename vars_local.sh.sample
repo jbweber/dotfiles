@@ -1,5 +1,0 @@
-# local variables which override globals
-
-# http_proxy=http://proxy.example.org:8080
-# https_proxy=http://proxy.example.org:8080
-# no_proxy=".example.org,.example.com"

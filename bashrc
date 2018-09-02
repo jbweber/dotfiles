@@ -81,4 +81,9 @@ export SSH_AUTH_SOCK
 [[ -d ${HOME}/.go/bin ]] && {
     export GOROOT=${HOME}/.go
     path_prepend ${GOROOT}/bin
+    path_prepend ${HOME}/go/bin
+}
+
+[[ -d ${HOME}/.local/bin ]] && {
+    path_prepend ${HOME}/.local/bin
 }

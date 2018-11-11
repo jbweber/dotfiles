@@ -16,6 +16,8 @@ source $HOME/.dotfiles/functions.sh
 
 [[ -e "/usr/share/terminfo/s/screen-256color" ]] &&
     TERM=screen-256color ||
+[[ -e "/usr/share/terminfo/s/screen-256color-s" ]] &&
+    TERM=screen-256color-s ||
     TERM=xterm-color
 export TERM
 
@@ -66,24 +68,32 @@ PS1="\n${WHITE}[\${?}]${YELLOW}\u${WHITE}@${RED}\h${WHITE}:\w\n\$ ${NONE}"
 PS2="--> "
 export PS1 PS2
 
-# load local stuff
-if [[ -d $HOME/.bin ]]; then
+# add binaries from our dotfiles
+if [[ -d $HOME/.dotfiles/bin ]]; then
     path_prepend $HOME/.dotfiles/bin
 fi
 
-# ssh agent
-SSH_AUTH_SOCK=/tmp/${USER}/ssh-agent.sock
-SSH_AUTH_SOCK_DIR=$(dirname ${SSH_AUTH_SOCK})
-[[ -d ${SSH_AUTH_SOCK_DIR} ]] || mkdir -m0700 ${SSH_AUTH_SOCK_DIR}
-[[ -S ${SSH_AUTH_SOCK} ]] || eval $(ssh-agent -a "${SSH_AUTH_SOCK}" -t 8h)
-export SSH_AUTH_SOCK
+# add binaries from .local
+[[ -d ${HOME}/.local/bin ]] && {
+    path_prepend ${HOME}/.local/bin
+}
 
+# load golang configuration if installed
 [[ -d ${HOME}/.go/bin ]] && {
     export GOROOT=${HOME}/.go
     path_prepend ${GOROOT}/bin
     path_prepend ${HOME}/go/bin
 }
 
-[[ -d ${HOME}/.local/bin ]] && {
-    path_prepend ${HOME}/.local/bin
-}
+# setup ssh agent
+SSH_AUTH_SOCK=/tmp/${USER}/ssh-agent.sock
+SSH_AUTH_SOCK_DIR=$(dirname ${SSH_AUTH_SOCK})
+
+mkdir -p ${HOME}/.ssh
+chmod 700 ${HOME}/.ssh
+grep -q -F "IdentityAgent ${SSH_AUTH_SOCK}" ${HOME}/.ssh/config || echo "IdentityAgent ${SSH_AUTH_SOCK}" >> ${HOME}/.ssh/config
+grep -q -F "AddKeysToAgent yes" ${HOME}/.ssh/config || echo "AddKeysToAgent yes" >> ${HOME}/.ssh/config
+
+[[ -d ${SSH_AUTH_SOCK_DIR} ]] || mkdir -m0700 ${SSH_AUTH_SOCK_DIR}
+[[ -S ${SSH_AUTH_SOCK} ]] || eval $(ssh-agent -a "${SSH_AUTH_SOCK}" -t 8h)
+export SSH_AUTH_SOCK

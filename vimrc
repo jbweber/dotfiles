@@ -24,7 +24,7 @@ set completeopt=longest,menuone
 " color settings
 set t_Co=256            " allow 256 colors in the terminal
 set background=dark
-colorscheme wombat256
+colorscheme wombat256mod
 
 " vim-airline
 let g:airline_theme='wombat'

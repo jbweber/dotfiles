@@ -11,6 +11,7 @@ set noshowmode      " mode will be seen with airline
 set ignorecase      " search ignores case
 set smartcase       " but not when the pattern has an upper case
 set autowrite       " automatically save before :next etc.
+set mouse=          "
 
 " spacing settings
 set tabstop=4       " visual spaces per <Tab>

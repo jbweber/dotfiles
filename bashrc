@@ -97,3 +97,10 @@ grep -q -F "AddKeysToAgent yes" ${HOME}/.ssh/config || echo "AddKeysToAgent yes"
 [[ -d ${SSH_AUTH_SOCK_DIR} ]] || mkdir -m0700 ${SSH_AUTH_SOCK_DIR}
 [[ -S ${SSH_AUTH_SOCK} ]] || eval $(ssh-agent -a "${SSH_AUTH_SOCK}" -t 8h)
 export SSH_AUTH_SOCK
+
+# default aliases
+alias egrep="egrep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias grep="grep --color=auto"
+alias ls="ls --color=auto"
+alias vi=vim

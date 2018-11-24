@@ -60,7 +60,7 @@ RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
 WHITE="\[\033[0;37m\]"
 NONE="\[\033[0m\]"
-PS1="\n${WHITE}[\${?}]${CYAN}\u${WHITE}@${PURPLE}\h${WHITE}:\w\n\$ ${NONE}"
+PS1="\n${WHITE}[\${?}]${YELLOW}\u${WHITE}@${RED}\h${WHITE}:\w\n\$ ${NONE}"
 PS2="--> "
 export PS1 PS2
 

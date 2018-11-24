@@ -1,11 +1,7 @@
+# don't do anything on a non-interactive shell
 case "$-" in
-    *i*) INTERACTIVE=yes ;;
-    *)   unset INTERACTIVE ;;
-esac
-
-case "$0" in
-    -*) LOGIN=yes ;;
-    *)  unset LOGIN ;;
+    *i*) ;;
+    *) return ;;
 esac
 
 [[ -r /etc/bashrc && -f /etc/bashrc ]] && source /etc/bashrc
@@ -14,26 +10,26 @@ umask 022
 
 source $HOME/.dotfiles/functions.sh
 
-[[ -e "/usr/share/terminfo/s/screen-256color" ]] &&
-    TERM=screen-256color ||
-[[ -e "/usr/share/terminfo/s/screen-256color-s" ]] &&
-    TERM=screen-256color-s ||
-    TERM=xterm-color
+TERM=xterm-color
+[[ -e "/usr/share/terminfo/s/screen-256color" ]] && TERM=screen-256color
+[[ -e "/usr/share/terminfo/s/screen-256color-s" ]] && TERM=screen-256color-s
 export TERM
 
 # VAR=${OTHER:-default] var = other or default if not set
 # VAR=${OTHER:=default] var = other or default if not set, also set other
+# : noop operator
 : ${LANG:="en_US.UTF-8"}
 : ${LANGUAGE:="en"}
 : ${LC_ALL:="en_US.UTF-8"}
 : ${LC_CTYPE:="en_US.UTF-8"}
 export LANG LANGUAGE LC_ALL LC_CTYPE
 
-HISTCONTROL=erasedups
+HISTCONTROL=ignoreboth
 HISTFILESIZE=100000
 HISTSIZE=100000
-HISTIGNORE='$:exit'
+HISTIGNORE=" *:ls:cd:cd -:pwd:exit:date:history"
 shopt -s histappend
+export HISTCONTROL HISTFILESIZE HISTSIZE HISTIGNORE
 
 HAVE_VIM=$(command -v vim)
 [[ -n $HAVE_VIM ]] &&
@@ -64,7 +60,7 @@ RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
 WHITE="\[\033[0;37m\]"
 NONE="\[\033[0m\]"
-PS1="\n${WHITE}[\${?}]${YELLOW}\u${WHITE}@${RED}\h${WHITE}:\w\n\$ ${NONE}"
+PS1="\n${WHITE}[\${?}]${CYAN}\u${WHITE}@${PURPLE}\h${WHITE}:\w\n\$ ${NONE}"
 PS2="--> "
 export PS1 PS2
 
@@ -103,4 +99,5 @@ alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias grep="grep --color=auto"
 alias ls="ls --color=auto"
-alias vi=vim
+
+:

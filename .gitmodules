@@ -13,9 +13,6 @@
 [submodule "vim/pack/dotfiles/start/vim-yaml"]
 	path = vim/pack/dotfiles/start/vim-yaml
 	url = https://github.com/stephpy/vim-yaml.git
-[submodule "vim/pack/dotfiles/start/vim-go"]
-	path = vim/pack/dotfiles/start/vim-go
-	url = https://github.com/fatih/vim-go.git
 [submodule "vim/pack/dotfiles/start/vim-commentary"]
 	path = vim/pack/dotfiles/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
@@ -25,3 +22,6 @@
 [submodule "vim/pack/dotfiles/start/python-mode"]
 	path = vim/pack/dotfiles/start/python-mode
 	url = https://github.com/python-mode/python-mode.git
+[submodule "vim/pack/dotfiles/opt/vim-go"]
+	path = vim/pack/dotfiles/opt/vim-go
+	url = https://github.com/fatih/vim-go

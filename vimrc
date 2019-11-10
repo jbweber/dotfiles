@@ -4,6 +4,11 @@ if v:version < 800
     call pathogen#helptags()
 endif
 
+" load vim-go if our version is vim8+
+if v:version > 800
+    packadd vim-go
+endif
+
 " basic settings
 set nocompatible    " turn off vi compat mode
 set noshowmatch     " do not show matching brackets by flickering

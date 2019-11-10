@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir ~/.dotfiles_backup
+mkdir -p ~/.dotfiles_backup
 mv ~/.bash_profile ~/.bashrc ~/.gitconfig ~/.tmux.conf ~/.vim ~/.vimrc ~/.dotfiles_backup
 ln -sf ~/.dotfiles/bash_profile ~/.bash_profile
 ln -sf ~/.dotfiles/bashrc ~/.bashrc
@@ -8,9 +8,3 @@ ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/vim ~/.vim
 ln -sf ~/.dotfiles/vimrc ~/.vimrc
-
-# nvim
-mkdir -p ~/.config
-
-ln -sf ~/.dotfiles/vim ~/.config/nvim
-ln -sf ~/.dotfiles/vimrc ~/.config/nvim/init.vim

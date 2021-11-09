@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# parameter substitution
-# ${var-default} ${var:-default} - use default value : will use even if var declared but null
-# ${var=default} ${var:=default} - set default value : will set even if var declared but null
-# ${var+alt} ${var:+alt}         - use alt value if var set, otherwise null string : use alt value even if var declared but null otherwise null string
-
 manpath_append() {
     [[ -n "$1" ]] && \
     [[ -d "$1" ]] && \
@@ -34,4 +29,20 @@ path_prepend() {
     [[ -d "$1" ]] && \
     [[ ":$PATH:$" != *":$1:"* ]] && \
     PATH="$1${PATH:+":$PATH"}"
+}
+
+function path_clean_2() {
+    PATH=${PATH/#":"/}     # delete leading colon
+    PATH=${PATH/%":"/}     # delete trailing colon
+}
+
+function path_remove() {
+    # if the pattern is repeated the find / replace has to be run multiple times
+    # .e.g PATH=/bin:$1:$1:$1:/usr/bin will run three time
+    while [[ "$PATH" = *":$1:"* ]]; do
+        PATH=${PATH//":$1:"/":"} # search middle of string // = replace all occurances
+        let COUNTER=COUNTER+1
+    done
+    PATH=${PATH/#"$1:"/}     # delete from the start of string
+    PATH=${PATH/%":$1"/}     # delete from the end of string
 }

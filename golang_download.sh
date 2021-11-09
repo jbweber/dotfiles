@@ -2,7 +2,7 @@
 
 set -x
 
-GOLANG_VERSION=1.11.2
+GOLANG_VERSION=1.17.3
 GOLANG_DOWNLOAD_URL=https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz
 
 [[ ! -d ${HOME}/.go${GOLANG_VERSION} ]] && {

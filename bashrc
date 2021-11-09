@@ -4,11 +4,15 @@ case "$-" in
     *) return ;;
 esac
 
-[[ -r /etc/bashrc && -f /etc/bashrc ]] && source /etc/bashrc
+if [[ -r /etc/bashrc ]]; then
+    . /etc/bashrc
+elif [[ -r /etc/bash.bashrc ]]; then
+    . /etc/bash.bashrc
+fi
 
 umask 022
 
-source $HOME/.dotfiles/functions.sh
+. $HOME/.dotfiles/functions.sh
 
 TERM=xterm-color
 [[ -e "/usr/share/terminfo/s/screen-256color" ]] && TERM=screen-256color
@@ -37,18 +41,21 @@ HAVE_VIM=$(command -v vim)
     EDITOR=vi
 export EDITOR
 
-dircolors="$(type -P gdircolors dircolors | head -1)"
-[[ -n $dircolors ]] && {
-    COLORS=/etc/DIR_COLORS
-    test -e "/etc/DIR_COLORS.$TERM" && COLORS="/etc/DIR_COLORS.$TERM"
-    test -e "$HOME/.dircolors" && COLORS="$HOME/.dircolors"
-    test ! -e "$COLORS" && COLORS=
-    eval `$dircolors --sh $COLORS`
+[[ -x /usr/bin/dircolors ]] && {
+    test -r "$HOME/.dircolors" && eval "$(dircolors -b $HOME/.dircolors)" || eval "$(dircolors -b)"
+
+    # color aliases
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 }
-unset dircolors
 
 # set the directory color to a better blue
-export LS_COLORS=$(echo $LS_COLORS | sed "s/di=\(..\);../di=\1;94/")
+#export LS_COLORS=$(echo $LS_COLORS | sed "s/di=\(..\);../di=\1;94/")
 
 # prompt
 BLUE="\[\033[0;34m\]"
@@ -64,9 +71,13 @@ PS1="\n${WHITE}[\${?}]${YELLOW}\u${WHITE}@${RED}\h${WHITE}:\w\n\$ ${NONE}"
 PS2="--> "
 export PS1 PS2
 
-# add binaries from our dotfiles
-if [[ -d $HOME/.dotfiles/bin ]]; then
-    path_prepend $HOME/.dotfiles/bin
+# enable bash completion
+if ! shopt -oq posix; then
+    if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [[ -f /etc/bash_completion ]]; then
+        . /etc/bash_completion
+    fi
 fi
 
 # add binaries from .local
@@ -77,27 +88,36 @@ fi
 # load golang configuration if installed
 [[ -d ${HOME}/.go/bin ]] && {
     export GOROOT=${HOME}/.go
+    export GOPATH=${HOME}/go
+
+    mkdir -p ${GOPATH}/bin
+
+    path_prepend ${GOPATH}/bin
     path_prepend ${GOROOT}/bin
-    path_prepend ${HOME}/go/bin
 }
 
 # setup ssh agent
-SSH_AUTH_SOCK=/tmp/${USER}/ssh-agent.sock
+SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/ssh-agent.sock
 SSH_AUTH_SOCK_DIR=$(dirname ${SSH_AUTH_SOCK})
 
-mkdir -p ${HOME}/.ssh
-chmod 700 ${HOME}/.ssh
-grep -q -F "IdentityAgent ${SSH_AUTH_SOCK}" ${HOME}/.ssh/config || echo "IdentityAgent ${SSH_AUTH_SOCK}" >> ${HOME}/.ssh/config
-grep -q -F "AddKeysToAgent yes" ${HOME}/.ssh/config || echo "AddKeysToAgent yes" >> ${HOME}/.ssh/config
+[[ -d ${SSH_AUTH_SOCK_DIR} ]] || mkdir -m0700 -p ${SSH_AUTH_SOCK_DIR}
+[[ -S ${SSH_AUTH_SOCK} ]] || eval $(ssh-agent -a "${SSH_AUTH_SOCK}" -t 4h)
 
-[[ -d ${SSH_AUTH_SOCK_DIR} ]] || mkdir -m0700 ${SSH_AUTH_SOCK_DIR}
-[[ -S ${SSH_AUTH_SOCK} ]] || eval $(ssh-agent -a "${SSH_AUTH_SOCK}" -t 8h)
+NUM_AGENTS=$(ps --user ${USER} -ef | grep '[s]sh-agent' | wc -l)
+echo "~~~~"
+echo "there are ${NUM_AGENTS} ssh-agent processes running for ${USER}"
+echo "~~~~"
+
 export SSH_AUTH_SOCK
 
-# default aliases
-alias egrep="egrep --color=auto"
-alias fgrep="fgrep --color=auto"
-alias grep="grep --color=auto"
-alias ls="ls --color=auto"
+# load cargo
+if [[ -d "$HOME/.cargo/bin" ]]; then
+    path_prepend "$HOME/.cargo/bin"
+fi
+
+# load nix
+if [[ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
+    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+fi
 
 :

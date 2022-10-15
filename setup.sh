@@ -1,9 +1,14 @@
 #!/bin/bash
 
-mkdir -p ~/.dotfiles_backup
-mv ~/.bash_profile ~/.bashrc ~/.gitconfig ~/.tmux.conf ~/.dotfiles_backup
-ln -sf ~/.dotfiles/bash_profile ~/.bash_profile
-ln -sf ~/.dotfiles/bashrc ~/.bashrc
-ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
-ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
-mkdir -p ~/.local/bin
+ln -snf ~/.dotfiles/bash_profile ~/.bash_profile
+ln -snf ~/.dotfiles/bashrc ~/.bashrc
+ln -snf ~/.dotfiles/gitconfig ~/.gitconfig
+ln -snf ~/.dotfiles/inputrc ~/.inputrc
+
+mkdir -p ~/.config/systemd/user
+cp ssh-agent.service ~/.config/systemd/user
+systemctl --user enable --now ssh-agent
+
+#ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+#ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+#mkdir -p ~/.local/bin

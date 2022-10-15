@@ -72,52 +72,52 @@ PS2="--> "
 export PS1 PS2
 
 # enable bash completion
-if ! shopt -oq posix; then
-    if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-        . /usr/share/bash-completion/bash_completion
-    elif [[ -f /etc/bash_completion ]]; then
-        . /etc/bash_completion
-    fi
-fi
+#if ! shopt -oq posix; then
+#    if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+#        . /usr/share/bash-completion/bash_completion
+#    elif [[ -f /etc/bash_completion ]]; then
+#        . /etc/bash_completion
+#    fi
+#fi
 
 # add binaries from .local
-[[ -d ${HOME}/.local/bin ]] && {
-    path_prepend ${HOME}/.local/bin
-}
+#[[ -d ${HOME}/.local/bin ]] && {
+#    path_prepend ${HOME}/.local/bin
+#}
 
 # load golang configuration if installed
-[[ -d ${HOME}/.go/bin ]] && {
-    export GOROOT=${HOME}/.go
-    export GOPATH=${HOME}/go
-
-    mkdir -p ${GOPATH}/bin
-
-    path_prepend ${GOPATH}/bin
-    path_prepend ${GOROOT}/bin
-}
+#[[ -d ${HOME}/.go/bin ]] && {
+#    export GOROOT=${HOME}/.go
+#    export GOPATH=${HOME}/go
+#
+#    mkdir -p ${GOPATH}/bin
+#
+#    path_prepend ${GOPATH}/bin
+#    path_prepend ${GOROOT}/bin
+#}
 
 # setup ssh agent
-SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/ssh-agent.sock
-SSH_AUTH_SOCK_DIR=$(dirname ${SSH_AUTH_SOCK})
+#SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/ssh-agent.sock
+#SSH_AUTH_SOCK_DIR=$(dirname ${SSH_AUTH_SOCK})
 
-[[ -d ${SSH_AUTH_SOCK_DIR} ]] || mkdir -m0700 -p ${SSH_AUTH_SOCK_DIR}
-[[ -S ${SSH_AUTH_SOCK} ]] || eval $(ssh-agent -a "${SSH_AUTH_SOCK}" -t 4h)
+#[[ -d ${SSH_AUTH_SOCK_DIR} ]] || mkdir -m0700 -p ${SSH_AUTH_SOCK_DIR}
+#[[ -S ${SSH_AUTH_SOCK} ]] || eval $(ssh-agent -a "${SSH_AUTH_SOCK}" -t 4h)
 
-NUM_AGENTS=$(ps --user ${USER} -ef | grep '[s]sh-agent' | wc -l)
-echo "~~~~"
-echo "there are ${NUM_AGENTS} ssh-agent processes running for ${USER}"
-echo "~~~~"
+#NUM_AGENTS=$(ps --user ${USER} -ef | grep '[s]sh-agent' | wc -l)
+#echo "~~~~"
+#echo "there are ${NUM_AGENTS} ssh-agent processes running for ${USER}"
+#echo "~~~~"
 
-export SSH_AUTH_SOCK
+#export SSH_AUTH_SOCK
 
 # load cargo
-if [[ -d "$HOME/.cargo/bin" ]]; then
-    path_prepend "$HOME/.cargo/bin"
-fi
+#if [[ -d "$HOME/.cargo/bin" ]]; then
+#    path_prepend "$HOME/.cargo/bin"
+#fi
 
 # load nix
-if [[ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
-    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-fi
+#if [[ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
+#    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+#fi
 
 :

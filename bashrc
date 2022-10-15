@@ -4,15 +4,7 @@ case "$-" in
     *) return ;;
 esac
 
-if [[ -r /etc/bashrc ]]; then
-    . /etc/bashrc
-elif [[ -r /etc/bash.bashrc ]]; then
-    . /etc/bash.bashrc
-fi
-
-umask 022
-
-. $HOME/.dotfiles/functions.sh
+umask 0022
 
 TERM=xterm-color
 [[ -e "/usr/share/terminfo/s/screen-256color" ]] && TERM=screen-256color
@@ -54,9 +46,6 @@ export EDITOR
     alias egrep='egrep --color=auto'
 }
 
-# set the directory color to a better blue
-#export LS_COLORS=$(echo $LS_COLORS | sed "s/di=\(..\);../di=\1;94/")
-
 # prompt
 BLUE="\[\033[0;34m\]"
 BBLUE="\[\033[1;34m\]"
@@ -71,53 +60,8 @@ PS1="\n${WHITE}[\${?}]${YELLOW}\u${WHITE}@${RED}\h${WHITE}:\w\n\$ ${NONE}"
 PS2="--> "
 export PS1 PS2
 
-# enable bash completion
-#if ! shopt -oq posix; then
-#    if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-#        . /usr/share/bash-completion/bash_completion
-#    elif [[ -f /etc/bash_completion ]]; then
-#        . /etc/bash_completion
-#    fi
-#fi
-
-# add binaries from .local
-#[[ -d ${HOME}/.local/bin ]] && {
-#    path_prepend ${HOME}/.local/bin
-#}
-
-# load golang configuration if installed
-#[[ -d ${HOME}/.go/bin ]] && {
-#    export GOROOT=${HOME}/.go
-#    export GOPATH=${HOME}/go
-#
-#    mkdir -p ${GOPATH}/bin
-#
-#    path_prepend ${GOPATH}/bin
-#    path_prepend ${GOROOT}/bin
-#}
-
-# setup ssh agent
-#SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/ssh-agent.sock
-#SSH_AUTH_SOCK_DIR=$(dirname ${SSH_AUTH_SOCK})
-
-#[[ -d ${SSH_AUTH_SOCK_DIR} ]] || mkdir -m0700 -p ${SSH_AUTH_SOCK_DIR}
-#[[ -S ${SSH_AUTH_SOCK} ]] || eval $(ssh-agent -a "${SSH_AUTH_SOCK}" -t 4h)
-
-#NUM_AGENTS=$(ps --user ${USER} -ef | grep '[s]sh-agent' | wc -l)
-#echo "~~~~"
-#echo "there are ${NUM_AGENTS} ssh-agent processes running for ${USER}"
-#echo "~~~~"
-
-#export SSH_AUTH_SOCK
-
-# load cargo
-#if [[ -d "$HOME/.cargo/bin" ]]; then
-#    path_prepend "$HOME/.cargo/bin"
-#fi
-
-# load nix
-#if [[ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
-#    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-#fi
+# check the window size after each command and, if necessary, update the values
+# of LINES and COLUMNS.
+shopt -s checkwinsize
 
 :

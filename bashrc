@@ -64,4 +64,9 @@ export PS1 PS2
 # of LINES and COLUMNS.
 shopt -s checkwinsize
 
+SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/ssh-agent.socket
+[[ -S "${SSH_AUTH_SOCK}" ]] && {
+    export SSH_AUTH_SOCK
+}
+
 :

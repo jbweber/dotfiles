@@ -6,6 +6,10 @@ ln -snf ~/.dotfiles/gitconfig ~/.gitconfig
 ln -snf ~/.dotfiles/inputrc ~/.inputrc
 ln -snf ~/.dotfiles/tmux.conf ~/.tmux.conf
 
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+ln -snf ~/.dotfiles/ssh_config ~/.ssh/config
+
 mkdir -p ~/.config/systemd/user
 cp ssh-agent.service ~/.config/systemd/user
 systemctl --user enable --now ssh-agent
